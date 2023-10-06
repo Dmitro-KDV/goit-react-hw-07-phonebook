@@ -12,23 +12,22 @@ const handlePending = state => {
   state.contacts.isLoading = true;
 };
 
-const handleFulfilled = (state, { payload }) => {
-    state.contacts.isLoading = false;
+const handleFulfilled = (state) => {
+  state.contacts.isLoading = false;
+  state.contacts.error = null;
+};
+
+const handleFulfilledGet = (state, { payload }) => {
     state.contacts.items = payload;
-    state.contacts.error = null;
 };
 
 const handleFulfilledAdd = (state, { payload }) => {
-    state.contacts.isLoading = false;
     state.contacts.items.push(payload);
-    state.contacts.error = null;
 };
 
 
 const handleFulfilledDelete = (state, { payload }) => {
-    state.contacts.isLoading = false;
     state.contacts.items = state.contacts.items.filter(el => el.id !== payload.id);
-    state.contacts.error = null;
 };
 
 const handleRejected = (state, { payload }) => {
@@ -44,7 +43,7 @@ export const contactsSlice = createSlice({
   (builder) => {
     builder
         // .addCase(fetchContacts.pending, handlePending)
-        .addCase(fetchContacts.fulfilled, handleFulfilled)
+        .addCase(fetchContacts.fulfilled, handleFulfilledGet)
         // .addCase(fetchContacts.rejected, handleRejected)
         // .addCase(addContact.pending, handlePending)
         .addCase(addContact.fulfilled, handleFulfilledAdd)
@@ -55,6 +54,7 @@ export const contactsSlice = createSlice({
         .addMatcher(isAnyOf(...fn('pending')), handlePending)
         // .addMatcher(isAnyOf(...fn(defailtStatus.defFalse)), handleFulfilled)
         .addMatcher(isAnyOf(...fn('rejected')), handleRejected)
+        .addMatcher(isAnyOf(...fn('fulfilled')), handleFulfilled)
   },
 });
 
