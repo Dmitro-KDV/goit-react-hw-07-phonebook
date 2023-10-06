@@ -8,6 +8,12 @@ const fn = (status) => {
     return customArr.map((el) => el[status])
 }
 
+const STATUS = {
+  PENDING: 'pending',
+  REJECTED: 'rejected',
+  FULFILLED: 'fulfilled',
+}
+
 const handlePending = state => {
   state.contacts.isLoading = true;
 };
@@ -41,6 +47,7 @@ export const contactsSlice = createSlice({
   extraReducers: 
   
   (builder) => {
+    const {PENDING, FULFILLED, REJECTED} = STATUS
     builder
         // .addCase(fetchContacts.pending, handlePending)
         .addCase(fetchContacts.fulfilled, handleFulfilledGet)
@@ -51,9 +58,9 @@ export const contactsSlice = createSlice({
         // .addCase(deleteContact.pending, handlePending)
         .addCase(deleteContact.fulfilled, handleFulfilledDelete)
         // .addCase(deleteContact.rejected, handleRejected)
-        .addMatcher(isAnyOf(...fn('pending')), handlePending)
-        .addMatcher(isAnyOf(...fn('rejected')), handleRejected)
-        .addMatcher(isAnyOf(...fn('fulfilled')), handleFulfilled)
+        .addMatcher(isAnyOf(...fn(PENDING)), handlePending)
+        .addMatcher(isAnyOf(...fn(FULFILLED)), handleRejected)
+        .addMatcher(isAnyOf(...fn(REJECTED)), handleFulfilled)
   },
 });
 
