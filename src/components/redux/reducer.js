@@ -56,7 +56,6 @@ export const contactsSlice = createSlice({
         // .addMatcher(isAnyOf(...fn(defailtStatus.defFalse)), handleFulfilled)
         .addMatcher(isAnyOf(...fn('rejected')), handleRejected)
   },
-
 });
 
 const filtersSlice = createSlice({
