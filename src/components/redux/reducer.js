@@ -52,7 +52,6 @@ export const contactsSlice = createSlice({
         .addCase(deleteContact.fulfilled, handleFulfilledDelete)
         // .addCase(deleteContact.rejected, handleRejected)
         .addMatcher(isAnyOf(...fn('pending')), handlePending)
-        // .addMatcher(isAnyOf(...fn(defailtStatus.defFalse)), handleFulfilled)
         .addMatcher(isAnyOf(...fn('rejected')), handleRejected)
         .addMatcher(isAnyOf(...fn('fulfilled')), handleFulfilled)
   },
