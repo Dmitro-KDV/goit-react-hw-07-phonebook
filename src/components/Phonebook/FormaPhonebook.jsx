@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 export const FormaPhonebook = () => {
 
-    const { contacts} = useSelector(state => state.contacts);
+    const { items} = useSelector(state => state.contacts.contacts);
 
     const dispatch = useDispatch();
 
@@ -15,7 +15,7 @@ export const FormaPhonebook = () => {
         if (!name.value.trim() || !number.value.trim()) 
             return form.reset();
         
-        const isAlredyContacts = contacts.items.find(el => el.name === name.value);
+        const isAlredyContacts = items.find(el => el.name === name.value);
         if (isAlredyContacts) return alert(`${name.value} is alredy in contacts.`);
     
         const newContacts = {

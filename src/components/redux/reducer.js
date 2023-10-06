@@ -59,8 +59,8 @@ export const contactsSlice = createSlice({
         .addCase(deleteContact.fulfilled, handleFulfilledDelete)
         // .addCase(deleteContact.rejected, handleRejected)
         .addMatcher(isAnyOf(...fn(PENDING)), handlePending)
-        .addMatcher(isAnyOf(...fn(FULFILLED)), handleRejected)
-        .addMatcher(isAnyOf(...fn(REJECTED)), handleFulfilled)
+        .addMatcher(isAnyOf(...fn(REJECTED)), handleRejected)
+        .addMatcher(isAnyOf(...fn(FULFILLED)), handleFulfilled)
   },
 });
 
