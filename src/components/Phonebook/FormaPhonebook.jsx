@@ -1,10 +1,11 @@
 import {Form, Label} from './Phonebook.stiled';
 import { addContact } from 'components/redux/operation';
+import { contactsSelector } from 'components/redux/selector';
 import { useDispatch, useSelector } from 'react-redux';
 
 export const FormaPhonebook = () => {
 
-    const { items} = useSelector(state => state.contacts.contacts);
+    const contacts = useSelector(contactsSelector);
 
     const dispatch = useDispatch();
 
@@ -15,7 +16,7 @@ export const FormaPhonebook = () => {
         if (!name.value.trim() || !number.value.trim()) 
             return form.reset();
         
-        const isAlredyContacts = items.find(el => el.name === name.value);
+        const isAlredyContacts = contacts.find(el => el.name === name.value);
         if (isAlredyContacts) return alert(`${name.value} is alredy in contacts.`);
     
         const newContacts = {
